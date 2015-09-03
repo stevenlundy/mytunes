@@ -17,7 +17,7 @@ var SongQueue = Songs.extend({
     }, this);
 
     this.on('add', function(song) {
-      if (this.length === 1) {
+      if (this.first() === song) {
         this.playFirst()
       }
     });
@@ -50,17 +50,27 @@ var SongQueue = Songs.extend({
 
   removeAll: function() {
     this.remove(this.models);
+    this.setPlaylistTitle('');
   },
 
-  setPlaylist: function(playlist) {
+  playPlaylist: function(playlist) {
     this.removeAll();
-    this.add(playlist.collection);
-    this.playlistTitle = playlist.title;
+    this.add(playlist.get('tracks'));
+    this.setPlaylistTitle(playlist.get('title'));
+  }, 
+
+  addPlaylist: function(playlist) {
+    this.add(playlist.get('tracks'));
   },
 
   savePlaylist: function(playlistTitle) {
-    this.playlistTitle = playlistTitle;
+    this.setPlaylistTitle(playlistTitle);
     this.trigger('savePlaylist', this);
+  },
+
+  setPlaylistTitle: function(title) {
+    this.playlistTitle = title;
+    this.trigger('titleChange', this);
   }
 
 });

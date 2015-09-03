@@ -11,6 +11,10 @@ var SongQueueView = Backbone.View.extend({
       this.render();
     }, this);
 
+    this.collection.on('titleChange', function(){
+      this.$el.find('.playlistTitle').val(this.collection.playlistTitle);
+    }, this);
+
     this.$el.html(this.template(this.collection));
 
     this.render();

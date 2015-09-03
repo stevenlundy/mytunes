@@ -34,15 +34,20 @@ var AppModel = Backbone.Model.extend({
     var playlists = this.get('playlists');
 
     playlists.on('enqueue', function(playlist) {
-      songQueue.enqueue(playlist);
+      songQueue.addPlaylist(playlist);
+    });
+
+    playlists.on('play', function(playlist) {
+      songQueue.playPlaylist(playlist);
     });
 
     songQueue.on('savePlaylist', function(playlist){
+      debugger;
+      var duplicate = playlists.findWhere({title: playlist.playlistTitle});
+      if (duplicate) {
+        playlists.remove(duplicate);
+      }
       playlists.add(new Playlist(playlist.playlistTitle, playlist.models)); 
-      // {
-      //   title: playlist.playlistTitle,
-      //   collection: playlist.models
-      // }))
     });
   }
 
