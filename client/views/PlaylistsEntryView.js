@@ -4,7 +4,7 @@ var PlaylistsEntryView = Backbone.View.extend({
 
   className: 'playlist',
 
-  template: _.template('<td><%= title &></td>'),
+  template: _.template('<td><%= title %></td>'),
 
 
   initialize: function() {

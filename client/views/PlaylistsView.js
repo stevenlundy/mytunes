@@ -7,6 +7,10 @@ var PlaylistsView = Backbone.View.extend({
 
   initialize: function() {
     this.$el.html(this.template());
+
+    this.collection.on('add', function() {
+      this.render();
+    }, this);
   },
 
   render: function() {
