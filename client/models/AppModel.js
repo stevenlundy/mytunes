@@ -23,6 +23,12 @@ var AppModel = Backbone.Model.extend({
     params.library.on('enqueue', function(song) {
       songQueue.enqueue(song);
     });
+
+    songQueue.on('remove', function() {
+      if(songQueue.length === 0){
+        this.set('currentSong', new SongModel());
+      }
+    }, this);
   }
 
 });
