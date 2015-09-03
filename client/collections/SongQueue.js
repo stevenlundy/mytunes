@@ -59,7 +59,6 @@ var SongQueue = Songs.extend({
   },
 
   savePlaylist: function(playlistTitle) {
-    debugger;
     this.playlistTitle = playlistTitle;
     this.trigger('savePlaylist', this);
   }

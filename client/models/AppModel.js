@@ -38,11 +38,11 @@ var AppModel = Backbone.Model.extend({
     });
 
     songQueue.on('savePlaylist', function(playlist){
-      debugger;
-      playlists.add(new Playlist({
-        title: playlist.playlistTitle,
-        collection: playlist.models
-      }))
+      playlists.add(new Playlist(playlist.playlistTitle, playlist.models)); 
+      // {
+      //   title: playlist.playlistTitle,
+      //   collection: playlist.models
+      // }))
     });
   }
 
