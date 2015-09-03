@@ -3,6 +3,8 @@ var SongQueue = Songs.extend({
 
   initialize: function() {
 
+    this.playlistTitle = '';
+
     this.on('dequeue', function(song) {
       this.dequeue(song);
     }, this);
@@ -34,7 +36,7 @@ var SongQueue = Songs.extend({
   },
 
   enqueue: function(song) {
-    this.push(song);
+    this.add(song);
   },
 
   dequeue: function(song) {
@@ -47,6 +49,19 @@ var SongQueue = Songs.extend({
   },
 
   removeAll: function() {
+    this.remove(this.models);
+  },
 
+  setPlaylist: function(playlist) {
+    this.removeAll();
+    this.add(playlist.collection);
+    this.playlistTitle = playlist.title;
+  },
+
+  savePlaylist: function(playlistTitle) {
+    debugger;
+    this.playlistTitle = playlistTitle;
+    this.trigger('savePlaylist', this);
   }
+
 });
