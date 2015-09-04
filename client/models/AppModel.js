@@ -6,6 +6,9 @@ var AppModel = Backbone.Model.extend({
     this.set('songQueue', new SongQueue());
     this.set('playlists', new Playlists());
 
+    var songQueue = this.get('songQueue');
+    var playlists = this.get('playlists');
+
     /* Note that 'this' is passed as the third argument. That third argument is
     the context. The 'play' handler will always be bound to that context we pass in.
     In this example, we're binding it to the App. This is helpful because otherwise
@@ -18,9 +21,6 @@ var AppModel = Backbone.Model.extend({
       this.set('currentSong', song);
     }, this);
 
-
-    var songQueue = this.get('songQueue');
-
     params.library.on('enqueue', function(song) {
       songQueue.enqueue(song);
     });
@@ -31,8 +31,6 @@ var AppModel = Backbone.Model.extend({
       }
     }, this);
 
-    var playlists = this.get('playlists');
-
     playlists.on('enqueue', function(playlist) {
       songQueue.addPlaylist(playlist);
     });
@@ -42,7 +40,6 @@ var AppModel = Backbone.Model.extend({
     });
 
     songQueue.on('savePlaylist', function(playlist){
-      debugger;
       var duplicate = playlists.findWhere({title: playlist.playlistTitle});
       if (duplicate) {
         playlists.remove(duplicate);

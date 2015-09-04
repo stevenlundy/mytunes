@@ -1,8 +1,10 @@
 var PlaylistsView = Backbone.View.extend({
 
-  tagName: 'table',
+  tagName: 'ul',
 
-  template: _.template('<tr><th>Playlists</th></tr>'),
+  className: 'collection with-header',
+
+  template: _.template('<li class="collection-header"><h4> Playlists</h4></li>'),
 
 
   initialize: function() {

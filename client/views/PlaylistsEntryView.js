@@ -1,18 +1,20 @@
 var PlaylistsEntryView = Backbone.View.extend({
 
-  tagName: 'tr',
+  tagName: 'li',
 
-  className: 'playlist',
+  className: 'collection-item playlist',
 
-  template: _.template('<td><%= title %></td> \
-                        <td><button class="playPlaylist">Play</button></td> \
-                        <td><button class="queuePlaylist">Queue</button></td>'),
+  template: _.template('<span class="title"><%= title  %></span> \
+                        <div class="secondary-content"> \
+                          <i class="playPlaylist material-icons">play_circle_filled</i> \
+                          <i class="queuePlaylist material-icons">queue</i> \
+                        </div>'),
 
   events: {
-    'click button.playPlaylist': function() {
+    'click .playPlaylist': function() {
       this.model.play();
     },
-    'click button.queuePlaylist': function() {
+    'click .queuePlaylist': function() {
       this.model.enqueue();
     }
   },

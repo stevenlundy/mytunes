@@ -1,10 +1,18 @@
 // SongQueueView.js - Defines a backbone view class for the song queue.
 var SongQueueView = Backbone.View.extend({
 
-  tagName: "table",
+  tagName: "ul",
 
-  template: _.template('<tr><th>Song Queue</th><th><button class="clearQueue">Clear</button></th></tr>\
-                        <tr><td><input type="text" class="playlistTitle" value="<%= playlistTitle %>"/></td><td><button class="savePlaylist">Save</button></td></tr>'),
+  className: 'collection with-header',
+
+  template: _.template('<li class="collection-header"><h4>Song Queue<i class="small material-icons clearQueue secondary-content">clear_all</i></h4></li>\
+                        <li class="collection-item"> \
+                          <div class="input-field"> \
+                            <input id="playlistTitle" type="text" class="validate playlistTitle" value="<%= playlistTitle %>"> \
+                            <label for="playlistTitle">Playlist Title</label> \
+                          </div> \
+                          <button class="savePlaylist btn waves-effect waves-light">Save</button> \
+                        </li>'),
 
   initialize: function() {
     this.collection.on('add remove', function() {
@@ -21,7 +29,7 @@ var SongQueueView = Backbone.View.extend({
   },
 
   events: {
-    'click button.clearQueue': function() {
+    'click .clearQueue': function() {
       this.collection.removeAll();
     },
     'click button.savePlaylist': function(){
